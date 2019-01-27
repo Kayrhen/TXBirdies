@@ -14,61 +14,58 @@
 
 <div class="main"><h2>Luggage ID: 98700</h2>
 	<div><p>
-	<span class="info"></span>
-	</p></div>
+	<span class="info"></span></p></div>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
-
+<scan class="bla"></scan>
 <script>
-$.getJSON('https://txbirdie.herokuapp.com/airports?code=AIY', function(json){
-	var firstplace = json[0].name;
-});
+var houstonIN = "";
 
-$.getJSON('https://txbirdie.herokuapp.com/airports?code=SAF', function(json){
-	var secondplace = json[0].name;
-});
-</script>
-  		<script>
 		$.getJSON('https://api.thingspeak.com/channels/688491/fields/1.json?results=2', function(data){
-      		var houstonIN = data.feeds[1].field1;
-		var updateIN = "";
-		var houstonINTIME = "";
-		if(houstonIN == "0"){
-			updateIN = "Check-in still pending...";
+      		houstonIN = data.feeds[1].field1;
+  	});
+		if(houstonIN != "0"){
+			$(".info").html("Checked in to ");
+			$.getJSON('https://txbirdie.herokuapp.com/airports?code=ANC', function(json){
+			$(".info").append(json[0].city);
+			});
+		}else{
+			$(".info").html("Check-in still pending... ");
 		}
-		else{
-			updateIN = "Checked in to " + firstplace;
-		}
-		$(".info").html(updateIN);
-  		});
-	</script><span class="second"></span>
+
+		
+	</script><div><span class="second"></span></div>
 <script>$.getJSON('https://api.thingspeak.com/channels/688491/fields/2.json?results=2', function(data2){
 		var houstonOUT = data2.feeds[1].field2;
-		var updateOUT = "";
 		if(houstonOUT != "0"){
-			updateOUT = "<div><p>Checked out of " + firstplace + "</p></div>";
+			$(".second").html("<p>Checked out of ");
+			$.getJSON('https://txbirdie.herokuapp.com/airports?code=ANC', function(json){
+			$(".second").append(json[0].city + "</p>");
+			});
 		}
-		$(".second").html(updateOUT);
-});</script>
-<span class="third"></span>
+	});
+
+
+</script>
+<div><span class="third"></span></div>
 <script>$.getJSON('https://api.thingspeak.com/channels/688491/fields/3.json?results=2', function(data3){
 		var bostonIN = data3.feeds[1].field3;
-		var updateBOSTIN = "";
-		var bostonINTIME = "";
 		if(bostonIN != "0"){
-			updateBOSTIN = "<div><p>Checked in to " + secondplace + "</p></div>";
+			$(".third").html("Checked in to <p>");
+			$.getJSON('https://txbirdie.herokuapp.com/airports?code=SAF', function(json){
+			$(".third").append(json[0].city + "</p>");
+			});
 		}
-		$(".third").html(updateBOSTIN);
 });</script>
 
-<span class="fourth"></span>
+<div><span class="fourth"></span></div>
 <script>$.getJSON('https://api.thingspeak.com/channels/688491/fields/4.json?results=2', function(data4){
 		var bostonOUT = data4.feeds[1].field4;
-		var updateBOSTOUT = "";
-		var bostonOUTTIME = "";
 		if(bostonOUT != "0"){
-			updateBOSTOUT = "<div><p>Checked out of " + secondplace + "</p></div>";
+			$(".fourth").html("Checked out of <p>");
+			$.getJSON('https://txbirdie.herokuapp.com/airports?code=SAF', function(json){
+			$(".fourth").append(json[0].city + "</p>");
+			});
 		}
-		$(".fourth").html(updateBOSTOUT);
 });
 	</script>
 <span class="time">Last Updated: </span>
