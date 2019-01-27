@@ -1,0 +1,18 @@
+#id{
+	border-color: #FFCC00;
+	border-radius: 3%;
+	border-width: 8px;
+	margin: auto;
+}
+
+#pw{
+	border-color: #FFCC00;
+	border-radius: 3%;
+	border-width: 8px;
+	margin: auto;
+}
+#form{
+	margin: auto;
+	width: 50%;
+	padding: 80px;
+}

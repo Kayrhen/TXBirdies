@@ -1,0 +1,10 @@
+<html>
+	<span class="info"></span>
+	<script language="Javascript">
+		var urlCode = 'https://api.thingspeak.com/channels/688491/feeds.json?results=2'; 
+  $.getJSON(urlCode, function(data){
+      $(".info").prepend('data[1][1][2]');
+    }
+  });
+	</script>
+</html>
